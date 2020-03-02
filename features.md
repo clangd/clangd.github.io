@@ -133,43 +133,35 @@ options.
 ### Rename
 
 Rename a symbol under the cursor. All usages of the symbol will be renamed,
-including **declaration**, **definition** and **references**.
+including declaration, definition and references.
 
 ![screenshot: rename](screenshots/rename.gif)
 
 Most symbols are renameable, such as classes, variables, functions and methods.
 
-**KNOWN LIMITATIONS**
-- unsupported symbols:
-    namespaces, macros, non-identifier symbols (e.g. overloaded operators),
-    virtual/overriden methods;
-- some references are not renamed (likely need manual modifications):
-  - references inside macro bodies
-  - references in comments
-  - references in generated files
-  - references in platform-specific code
-- templates maybe not perfect (explicit template specializations are missing, [b/280](https://github.com/clangd/clangd/issues/280))
-- no guaranatee on ObjC?
-- limit up to 50 files (to be friendly to editors)
+Known limitations
 
-> TIP: the rename experience highly depends on the editor you are using. Some
-> editors, e.g. VSCode (v1.42.0 or later), provide a way to preview the rename
-> changes before applying them; while some just apply the changes directly.
+- References in templates and macro bodies may not be renamed (difficult to
+  analyze in general)
+- References in comments and disabled preprocessor sections are not yet renamed
+- Related symbols (e.g. overriden methods in a class hierarchy) are not yet renamed
+
+> TIP: the rename workflow highly depends on the editor you are using. Some
+> editors, e.g. VSCode, provide a way to preview the rename changes before
+> applying them; while some just apply the changes directly.
 {:.tip}
 
 #### Within-file rename
 {:.v7}
 
-This is by-default mode, which only allows to rename a local symbol (which is
-only used in current main file).
-
+The default mode only allows to rename a local symbol (one which is only used in
+current file).
 
 #### Cross-file rename
 {:.v10}
 
-Under an experimental command-line flag `-cross-file-rename`.
+This mode allows renaming symbols used in several files. It is enabled with the
+command-line flag `-cross-file-rename`.
 
-The cross-file rename is based on the index, it is fast (no parsing of extra
-files) by trading off some correctness. It is encouraged to perform it when the
-index is **up-to-date** (e.g. background indexing is finished). But clangd will
-try to patch up the results if the index is stale.
+It uses the [project index](design/indexing.html) to find all renamed references
+quickly, so works best when the index is up-to-date.
