@@ -91,7 +91,10 @@ when parsing or indexing that file (or an included header). Again it's very
 useful to know what's in the file and minimize it as far as possible (especially
 include).
 
-Note that a background-indexing crash can look very similar.
+A crash goes that goes away when disabling clang-tidy (`-clang-tidy=0`) is
+likely specific to a particular check and pattern of code.
+
+Note that a background-indexing crash can appear to trigger on file open.
 
 ### Crashes in background indexing
 
