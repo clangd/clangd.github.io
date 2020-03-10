@@ -2,6 +2,8 @@
 
 Sorry if things are going wrong!
 
+{% include toc.md %}
+
 ## Update clangd
 
 Every release fixes many bugs, works in more scenarios, and provides clearer
