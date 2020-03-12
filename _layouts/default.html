@@ -1,34 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
+{% assign target = "https://clangd.llvm.org" | append: page.url %}
+<html>
 <head>
-  <link rel="stylesheet" href="{{'styles.css' | relative_url}}">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:600" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }}</title>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-159320230-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-159320230-1');
-  </script>
+  <title>The clangd documentation has moved to clangd.llvm.org</title>
+  <link rel="canonical" href="{{ target }}"/>
+  <meta http-equiv="refresh" content="0;url={{ target }}" />
 </head>
 <body>
-  <aside>
-    <header>
-      <a href="{{'/' | relative_url}}"><h1>clangd</h1></a>
-      <h2>teach your editor C++</h2>
-    </header>
-    <nav>{% for entry in site.data.navigation %}
-      {% if entry == 'separator' %}
-        <hr>
-      {% else %}
-      <a href="{{entry.url | relative_url}}" class="{%if page.url == entry.url%}selected{%endif%}">
-        <span class="icon">{{entry.icon}}</span><span>{{ entry.title }}</span></a>
-      {% endif %}
-    {% endfor %}</nav>
-  </aside>
-  <main>
-    {{ content }}
-  </main>
+  <h1>The clangd documentation has moved to clangd.llvm.org</h1>
+  <a href="{{ target }}">The new site<a>
+  <script>window.location='{{ target }}'</script>
 </body>
+</html>
